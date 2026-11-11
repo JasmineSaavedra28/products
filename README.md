@@ -1,6 +1,6 @@
 # Products API
 
-API RESTful para administrar un catálogo de productos, desarrollada con **Flask**, **Connexion**, **SQLAlchemy**, **Marshmallow** y **SQLite**, siguiendo la arquitectura del tutorial *People* de la materia Web API Flask SQLite, adaptada al dominio de Productos.
+API RESTful para administrar un catálogo de productos, desarrollada con **Flask**, **Connexion**, **SQLAlchemy**, **Marshmallow** y **SQLite**, siguiendo la arquitectura del tutorial *People*, adaptada al dominio de Productos.
 
 ## Características
 
@@ -74,16 +74,14 @@ cd products
 **Windows (PowerShell):**
 
 ```powershell
-py -3.14 -m venv .venv
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
-
-> Si Windows muestra el mensaje «no se encontró Python» o abre la Microsoft Store, usá el lanzador `py` en lugar de `python`. También podés ejecutar el intérprete del entorno virtual directamente: `.\.venv\Scripts\python.exe`.
 
 **Windows (CMD):**
 
 ```bat
-py -3.14 -m venv .venv
+python -m venv .venv
 .venv\Scripts\activate.bat
 ```
 
@@ -211,7 +209,7 @@ curl -X DELETE http://localhost:8000/api/products/Tablet%20Z
 - `nombre` es la clave única de búsqueda, equivalente a `lname` en el tutorial *People*.
 - `PUT` actualiza `marca` y `precio`; el nombre de la ruta se conserva para no romper la clave única.
 - `timestamp` se genera automáticamente y se actualiza con `onupdate=datetime.utcnow`.
-- `scripts/build_database.py` usa un contexto de aplicación porque Flask-SQLAlchemy 3.x lo requiere.
+- `build_database.py` usa un contexto de aplicación porque Flask-SQLAlchemy 3.x lo requiere.
 - La base `products.db` se genera localmente y está incluida en `.gitignore`.
 
 ## Notas sobre Connexion 3
@@ -234,57 +232,8 @@ En producción se puede ejecutar directamente con un servidor ASGI:
 uvicorn app:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
-## Solución de problemas
-
-### «No se encontró Python» o se abre Microsoft Store
-
-El comando `python` no está disponible en el PATH. Usá el lanzador `py`:
-
-```powershell
-py --version
-py -3.14 -m venv .venv
-```
-
-### «Activate.ps1 no se reconoce»
-
-Significa que la carpeta `.venv` todavía no existe, normalmente porque falló el paso anterior. Creala primero:
-
-```powershell
-py -3.14 -m venv .venv
-```
-
-Y luego activala:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-### Error de política de ejecución en PowerShell
-
-Si PowerShell bloquea el script de activación:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
-```
-
-También podés evitar la activación ejecutando directamente:
-
-```powershell
-.\.venv\Scripts\python.exe scripts\build_database.py
-.\.venv\Scripts\python.exe app.py
-```
-
 ## Subir el proyecto a GitHub
 
-```bash
-git init
-git add .
-git commit -m "API RESTful de productos con Flask, Connexion y SQLite"
-git branch -M main
-git remote add origin https://github.com/USUARIO/REPOSITORIO.git
-git push -u origin main
-```
 
 `products.db` está ignorado por Git. Se regenera con:
 
@@ -292,7 +241,7 @@ git push -u origin main
 python scripts/build_database.py
 ```
 
-Si necesitas incluir la base de datos en la entrega, puedes forzarla:
+Para incluir la base de datos, puedes forzarla:
 
 ```bash
 git add -f products.db
