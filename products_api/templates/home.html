@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - SQLite API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>Catálogo de Productos</h1>
+                <p class="subtitle">API RESTful con Flask, Connexion y SQLite</p>
+            </div>
+            <span class="badge">SQLite Backend Activo</span>
+        </header>
+
+        <p class="swagger-link">
+            Documentación interactiva:
+            <a href="/api/ui" target="_blank" rel="noopener">/api/ui</a>
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Última actualización</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td><strong>{{ product.nombre }}</strong></td>
+                        <td>{{ product.marca }}</td>
+                        <td>$ {{ "%.2f"|format(product.precio) }}</td>
+                        <td>
+                            {% if product.timestamp %}
+                                {{ product.timestamp.strftime("%Y-%m-%d %H:%M:%S") }}
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="empty-state">
+                            No hay productos registrados. Ejecuta
+                            <code>python scripts/build_database.py</code>.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Products API · Web API Flask SQLite</p>
+        </footer>
+    </main>
+</body>
+</html>

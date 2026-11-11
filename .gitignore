@@ -1,0 +1,46 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribución y empaquetado
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Base de datos SQLite generada localmente
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Variables de entorno y secretos
+.env
+.env.*
+
+# Editores e IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
